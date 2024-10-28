@@ -4,11 +4,7 @@
 
 ### Projects 
 
-[Linear Regression to Detect Scams](insert link here)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
-
----
-[CatBoost to detect Misdiagnosis of Chronic Pain](insert link here)
+[CatBoost to detect Misdiagnosis of Chronic Pain](https://github.com/aravparikh/Catboost-to-detect-Misdiagnosis-Risk-of-Chronic-Pain)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
