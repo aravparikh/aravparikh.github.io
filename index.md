@@ -4,11 +4,11 @@
 
 ### Projects 
 
-[Linear Regression to Detect Scams](/sample_page)
+[Linear Regression to Detect Scams](insert link here)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
-[CatBoost to detect Misdiagnosis of Chronic Pain](/pdf/sample_presentation.pdf)
+[CatBoost to detect Misdiagnosis of Chronic Pain](insert link here)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
