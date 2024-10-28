@@ -4,11 +4,11 @@
 
 ### Projects 
 
-[CatBoost to detect Misdiagnosis of Chronic Pain](https://github.com/aravparikh/Catboost-to-detect-Misdiagnosis-Risk-of-Chronic-Pain)
+[XGBOOST to detect Misdiagnosis of Chronic Pain](https://github.com/aravparikh/Catboost-to-detect-Misdiagnosis-Risk-of-Chronic-Pain)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
-[Gradient Boosting Classifier for Detecting Osteoarthritis](https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis)
+[VGG16 for Detecting Osteoarthritis](https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
