@@ -2,7 +2,7 @@
 
 ---
 
-### Category Name 1 
+### Projects 
 
 [Linear Regression to Detect Scams](/sample_page)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
@@ -17,7 +17,7 @@
 
 ---
 
-### Category Name 2
+### Additional information for Projects
 
 - [Project 1 Title](http://example.com/)
 - [Project 2 Title](http://example.com/)
