@@ -21,7 +21,7 @@
 
 - [Project 1 Title](http://example.com/)
 - [Project 2 Title](http://example.com/)
-- [Project 3 Title](http://example.com/)
+- [Gradient Boosting Classifier for Detecting Osteoarthritis](https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis)
 
 
 ---
