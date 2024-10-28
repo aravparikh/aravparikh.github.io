@@ -12,16 +12,11 @@
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
-[Gradient Boosting Classifier for Detecting Osteoarthritis](http://example.com/)
+[Gradient Boosting Classifier for Detecting Osteoarthritis](https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
 
-### Additional information for Projects
-
-- [Project 1 Title](http://example.com/)
-- [Project 2 Title](http://example.com/)
-- [Gradient Boosting Classifier for Detecting Osteoarthritis](https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis)
 
 
 ---
