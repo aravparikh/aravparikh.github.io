@@ -1,0 +1,28 @@
+<div>
+  <span style="cursor:pointer; color:blue; text-decoration:underline;" onclick="showInfo('discord')">Discord Username</span>
+  <br><br>
+  <span style="cursor:pointer; color:blue; text-decoration:underline;" onclick="showInfo('email')">My Email Address</span>
+</div>
+
+<div id="infoModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; border:1px solid #ccc; padding:20px; z-index:1000;">
+  <span id="infoText"></span>
+  <br><br>
+  <button onclick="closeModal()" style="cursor:pointer;">Close</button>
+</div>
+
+<script>
+  function showInfo(type) {
+    let infoText = '';
+    if (type === 'discord') {
+      infoText = 'Your Discord Username: acp111';
+    } else if (type === 'email') {
+      infoText = 'Your Email Address: aravparikh712@gmail.com';
+    }
+    document.getElementById('infoText').innerText = infoText;
+    document.getElementById('infoModal').style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('infoModal').style.display = 'none';
+  }
+</script>
