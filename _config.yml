@@ -1,11 +1,11 @@
-title: John Doe # your name (or website title) here
+title: Arav Parikh # your name (or website title) here
 logo: "/images/logo.png?raw=true" # your photo (or logo) here
-description: > # your text below (remove <br> elements if you don't need line breaks)
+description: > # 14 year old Freshmen at Vista Del Lago. Interested in AI/Ml applications in healthcare.(remove <br> elements if you don't need line breaks)
   First description 
   <br><br>
   Second description 
   <br><br>
-  <a href="https://www.linkedin.com/in/example/">View My LinkedIn Profile</a> 
+  <a href="https://www.linkedin.com/in/arav-parikh-1853b92b6/">View My LinkedIn Profile</a> 
   
 remote_theme: pages-themes/minimal@v0.2.0
 plugins:
