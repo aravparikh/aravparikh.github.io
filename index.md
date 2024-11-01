@@ -33,7 +33,7 @@ I learned to investigate and summarize data sets to uncover patterns, spot anoma
 
 ### Supervised Machine Learning Regression from IBM through Coursera
 
-<img src="<img src="images/EDA Certificate.pdf?raw=true"/>
+<img src="<img src="images/supervised machine learning regression.pdf?raw=true"/>
 ?raw=true"/>
 
 ### What I learned: 
