@@ -33,7 +33,7 @@ I learned to investigate and summarize data sets to uncover patterns, spot anoma
 ---
 
 #### Supervised Machine Learning Regression from IBM through Coursera
-<img src="images/ML Regression Certificate.jpg?raw=true"/>
+<img src="images/supervised machine learning regression.jpg?raw=true"/>
 
 **What I learned:**  
 I learned to build and evaluate regression models to predict continuous outcomes. Using Python libraries like Scikit-Learn, I explored various regression algorithms, including linear regression, decision trees, and polynomial regression. The course covered essential concepts like model training, testing, and tuning hyperparameters to improve accuracy, as well as understanding key metrics such as Mean Absolute Error (MAE) and Mean Squared Error (MSE) to evaluate model performance. This course equipped me with practical skills to implement and refine regression models for predictive analysis tasks.
