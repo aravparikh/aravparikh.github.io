@@ -41,7 +41,7 @@ I learned to build and evaluate regression models to predict continuous outcomes
 ---
 
 #### Understanding Medical Research: Your Facebook Friend is Wrong from Yale University through Coursera
-<img src="images/Yale Medical Research Certificate.jpg?raw=true"/>
+<img src="images/medical research course.jpg?raw=true"/>
 
 **What I learned:**  
 This course focused on interpreting medical research and assessing its accuracy and reliability. I learned how to identify bias in studies, understand statistical significance, and evaluate research methods. Additionally, it taught me to critically analyze scientific claims and identify misleading conclusions, which has strengthened my ability to assess medical information accurately. These skills are valuable for evaluating the credibility of studies in healthcare, especially in understanding research on chronic pain and misdiagnosis.
