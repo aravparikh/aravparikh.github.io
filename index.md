@@ -15,5 +15,5 @@
 
 ### Certificates 
 
-Exploratory Data Anaylsis Certificate from IBM through Coursera
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+Python for Data Science, AI & Development from IBM through Coursera
+<img src="?raw=true"/>
