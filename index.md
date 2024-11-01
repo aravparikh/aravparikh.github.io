@@ -13,3 +13,7 @@
 
 ---
 
+### Certificates 
+
+Exploratory Data Anaylsis Certificate from IBM through Coursera
+<img src="images/dummy_thumbnail.jpg?raw=true"/>
