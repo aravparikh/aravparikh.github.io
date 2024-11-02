@@ -32,7 +32,6 @@ I learned the essentials of Python programming, including handling variables, da
 ---
 
 ### Exploratory Data Analysis - IBM
-<img src="images/EDA Certificate.jpg?raw=true" alt="EDA Certificate" width="300"/>
 <a href="images/EDA Certificate.pdf" class="button">View Certificate</a>
 
 **What I learned:**  
@@ -41,7 +40,6 @@ I learned to investigate and summarize data sets to uncover patterns, spot anoma
 ---
 
 ### Supervised Machine Learning Regression - IBM
-<img src="images/supervised machine learning regression.jpg?raw=true" alt="Regression Certificate" width="300"/>
 <a href="images/supervised machine learning regression.pdf" class="button">View Certificate</a>
 
 **What I learned:**  
@@ -50,7 +48,6 @@ I learned to build and evaluate regression models to predict continuous outcomes
 ---
 
 ### Understanding Medical Research - Yale University
-<img src="images/medical research course.jpg?raw=true" alt="Medical Research Certificate" width="300"/>
 <a href="images/medical research course.pdf" class="button">View Certificate</a>
 
 **What I learned:**  
