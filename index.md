@@ -24,7 +24,6 @@ title: Portfolio
 ## Certificates
 
 ### Python for Data Science, AI & Development - IBM
-<img src="images/first python course.jpg?raw=true" alt="Python Certificate" width="300"/>
 <a href="images/first python course.pdf" class="button">View Certificate</a>
 
 **What I learned:**  
