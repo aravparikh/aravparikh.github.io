@@ -1,3 +1,7 @@
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
 title: Arav Parikh # your name (or website title) here
 logo: "raw=true" # your photo (or logo) here
 description: > #
@@ -12,8 +16,3 @@ description: > #
   <span style="cursor:pointer; color:grey; text-decoration:underline;" onclick="showInfo('discord')">Discord Username: Acp111</span>
   <br><br>
   <span style="cursor:pointer; color:=grey; text-decoration:underline;" onclick="showInfo('email')">My Email Address: aravparikh712@gmail.com</span>
-
-remote_theme: pages-themes/minimal@v0.2.0
-plugins:
-  - jekyll-remote-theme
-google_analytics: UA-000000-0 # your Google Analytics tracking ID here (replace with actual ID)
