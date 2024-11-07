@@ -53,5 +53,19 @@ I learned to build and evaluate regression models to predict continuous outcomes
 **What I learned:**  
 This course focused on interpreting medical research and assessing its accuracy and reliability. I learned how to identify bias in studies, understand statistical significance, and evaluate research methods. Additionally, it taught me to critically analyze scientific claims and identify misleading conclusions, which has strengthened my ability to assess medical information accurately. These skills are valuable for evaluating the credibility of studies in healthcare, especially in understanding research on chronic pain and misdiagnosis.
 
+--- 
+
+### Entrepreneurship 1: Developing the Opportunity - Wharton School of Business
+<a href="images/Coursera KV21Y8PTM8NE.jpg" class="button">View Certificate</a>
+
+**What I learned:** 
+In "Entrepreneurship 1: Developing the Opportunity," you learned how to identify and evaluate viable business ideas by focusing on market needs and customer pain points. The course emphasized recognizing opportunities by assessing gaps in the market and understanding the value your idea could bring. You explored ways to validate your ideas through customer feedback, ensuring there’s genuine interest and a solid product-market fit. Additionally, you studied competitive analysis, learning how to differentiate your solution and leverage unique strengths. Overall, the course equipped you with foundational tools for shaping, testing, and refining business opportunities.
+
+---
+
+
+
+
+
 
 
