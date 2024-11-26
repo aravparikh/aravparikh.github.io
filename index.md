@@ -47,6 +47,14 @@ I learned to build and evaluate regression models to predict continuous outcomes
 
 ---
 
+### Generative AI and LLMs: Architecture and Data Preparation
+<a href="images/Coursera KPTPRG30FBE4.jpg" class="button">View Certificate</a>
+
+**What I learned:**
+In the "Generative AI and LLMs: Architecture and Data Preparation" course by IBM, I learned the foundational concepts behind generative AI and large language models (LLMs), including their architecture and how they are trained to generate human-like content. The course covered essential topics such as tokenization, embeddings, transformer models, and attention mechanisms, while also emphasizing the importance of data preparation, including cleaning, augmentation, and ensuring ethical data usage. Through practical examples, I explored how LLMs like GPT are fine-tuned for various applications, enabling me to understand their capabilities and real-world deployment.
+
+---
+
 ### Understanding Medical Research - Yale University
 <a href="images/medical research course.pdf" class="button">View Certificate</a>
 
