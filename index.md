@@ -47,7 +47,7 @@ I learned to build and evaluate regression models to predict continuous outcomes
 
 ---
 
-### Generative AI and LLMs: Architecture and Data Preparation
+### Generative AI and LLMs: Architecture and Data Preparation - IBM
 <a href="images/Coursera KPTPRG30FBE4.jpg" class="button">View Certificate</a>
 
 **What I learned:**
