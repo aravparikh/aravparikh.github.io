@@ -1,13 +1,11 @@
-
-title: Arav Parikh # your name (or website title) here
-remote_theme: pages-themes/minimal@v0.2.0
+title: Arav Parikh # Your name (or website title) here
+remote_theme: cotes2020/jekyll-theme-chirpy # Change to a dark theme
 plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
 
 # Optional config
-theme: minima
-logo: "raw=true" # your photo (or logo) here
+theme: chirpy # Ensure the theme supports dark mode
 description: > #
   I'm a freshman at Vista Del Lago with a passion for AI and machine learning, especially in healthcare applications. 
   <br><br>
@@ -19,5 +17,7 @@ description: > #
   <br><br>
   <a href="https://github.com/aravparikh/">View My Github Profile</a>
   <br><br>
-  <span style="cursor:pointer; color:=grey; text-decoration:underline;" onclick="showInfo('email')">My Email Address: aravparikh.1@gmail.com
-</span>
+  <span style="cursor:pointer; color: grey; text-decoration: underline;" onclick="showInfo('email')">My Email Address: aravparikh.1@gmail.com</span>
+
+# Enable dark mode settings (theme-specific)
+dark_mode: true
