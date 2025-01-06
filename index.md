@@ -16,7 +16,7 @@ title: Portfolio
 ---
 
 ### [VGG16 for Detecting Osteoarthritis](https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis)
-<img src="images/dummy_thumbnail.jpg?raw=true" alt="VGG16 Project Thumbnail" width="300"/>
+<img src="images/Screenshot 2025-01-05 181839.png" alt="VGG16 Project Thumbnail" width="300"/>
 <a href="https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis" class="button">View Project</a>
 
 ---
