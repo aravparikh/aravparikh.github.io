@@ -1,32 +1,21 @@
-/* Dark mode styling */
-body {
+body.dark-mode {
   background-color: #121212;
   color: #ffffff;
-  font-family: Arial, sans-serif;
 }
 
-a {
+body.dark-mode a {
   color: #bb86fc;
-  text-decoration: none;
 }
 
-a:hover {
+body.dark-mode a:hover {
   color: #3700b3;
 }
 
-/* Button styling */
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 10px 0;
-  background-color: #6200ee;
-  color: #ffffff;
-  border-radius: 5px;
-  text-align: center;
-  font-weight: bold;
-  text-decoration: none;
+body.dark-mode .button {
+  background-color: #bb86fc;
 }
 
-.button:hover {
+body.dark-mode .button:hover {
   background-color: #3700b3;
 }
+
