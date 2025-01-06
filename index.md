@@ -10,7 +10,7 @@ title: Portfolio
 ## Projects
 
 ### [XGBOOST to detect Misdiagnosis of Chronic Pain](https://github.com/aravparikh/Catboost-to-detect-Misdiagnosis-Risk-of-Chronic-Pain)
-<img src="images/dummy_thumbnail.jpg?raw=true" alt="XGBOOST Project Thumbnail" width="300"/>
+<img src="images/Screenshot 2025-01-05 183535.png" alt="XGBOOST Project Thumbnail" width="300"/>
 <a href="https://github.com/aravparikh/Catboost-to-detect-Misdiagnosis-Risk-of-Chronic-Pain" class="button">View Project</a>
 
 ---
