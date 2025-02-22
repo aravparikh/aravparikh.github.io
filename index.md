@@ -47,6 +47,22 @@ I learned to build and evaluate regression models to predict continuous outcomes
 
 ---
 
+### Supervised Machine Learning Classification - IBM
+<a href="images/Coursera 4MH8KTHL8ESA.jpg" class="button">View Certificate</a>
+
+**What I learned:**  
+I completed IBM’s Supervised Machine Learning Classification course, gaining expertise in classification algorithms such as Logistic Regression, Decision Trees, Support Vector Machines (SVMs), and Neural Networks. Learned model evaluation techniques, including precision-recall, ROC curves, and cross-validation, while applying concepts using Python and Scikit-Learn on real-world datasets.
+
+---
+
+### Unsupervised Machine Learning Regression - IBM
+<a href="images/Coursera A9JP2T870ZGH.pdf" class="button">View Certificate</a>
+
+**What I learned:**  
+Unsupervised Machine Learning - IBM | Completed IBM’s Unsupervised Machine Learning course, focusing on clustering techniques like K-Means, Hierarchical Clustering, and DBSCAN, as well as anomaly detection and dimensionality reduction methods such as PCA and t-SNE. Developed skills in handling unstructured data, discovering patterns, and optimizing models using Python and Scikit-Learn.
+
+---
+
 ### Generative AI and LLMs: Architecture and Data Preparation - IBM
 <a href="images/Coursera KPTPRG30FBE4.jpg" class="button">View Certificate</a>
 
