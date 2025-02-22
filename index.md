@@ -71,9 +71,15 @@ In "Entrepreneurship 1: Developing the Opportunity," you learned how to identify
 
 ---
 
+### Entrepreneurship 2: Launching your Start-Up - Wharton School of Business
 
+<a href="images/Coursera CEYI5MRAPHQE.pdf" class="button">View Certificate</a>
 
+**What I learned:**
 
+I completed the University of Pennsylvania's "Entrepreneurship 2: Launching Your Start-Up" course, gaining practical knowledge in launching a start-up. Developed skills in creating a minimum viable product (MVP), designing effective pitches, and making strategic decisions on when to pivot or proceed. Learned to build and manage a founding team, including early hires and equity allocation, and understood the importance of external advisors, professional services, and intellectual property considerations. Acquired strategies for branding, naming ventures, and developing entrepreneurial strategies to position start-ups for success.
+
+---
 
 
 
