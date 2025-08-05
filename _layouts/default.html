@@ -13,25 +13,33 @@
         }
 
         :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-            --accent-color: #f093fb;
-            --text-dark: #2d3748;
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --text-dark: #1a202c;
             --text-light: #4a5568;
             --bg-light: #f7fafc;
             --white: #ffffff;
-            --shadow: 0 10px 25px rgba(0,0,0,0.1);
-            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+            --glass: rgba(255, 255, 255, 0.1);
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
         [data-theme="dark"] {
-            --primary-color: #9f7aea;
-            --secondary-color: #667eea;
-            --accent-color: #ed64a6;
+            --primary: #9f7aea;
+            --secondary: #667eea;
+            --accent: #ed64a6;
             --text-dark: #e2e8f0;
-            --text-light: #cbd5e0;
+            --text-light: #a0aec0;
             --bg-light: #1a202c;
             --white: #2d3748;
+            --glass: rgba(0, 0, 0, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -40,11 +48,48 @@
             color: var(--text-dark);
             background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
             min-height: 100vh;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
         }
 
         [data-theme="dark"] body {
-            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            background: linear-gradient(135deg, #0f1419 0%, #1a202c 50%, #2d3748 100%);
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: -5s; }
+        .shape:nth-child(3) { width: 100px; height: 100px; top: 40%; left: 60%; animation-delay: -10s; }
+        .shape:nth-child(4) { width: 40px; height: 40px; top: 80%; left: 20%; animation-delay: -15s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
         }
 
         .container {
@@ -53,13 +98,16 @@
             padding: 0 20px;
         }
 
-        /* Header */
+        /* Enhanced Header */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             color: white;
-            padding: 2rem 0;
+            padding: 4rem 0;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
         header::before {
@@ -69,137 +117,212 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
         }
 
         .header-content {
             position: relative;
             z-index: 2;
             text-align: center;
+            animation: fadeInUp 1s ease-out;
         }
 
         .profile-section {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
         }
 
         .profile-image {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            background: linear-gradient(45deg, var(--accent), var(--primary));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
             color: white;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-xl);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
         }
 
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, #ffffff, var(--accent-color));
+        .profile-image:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--primary), var(--secondary));
+            z-index: -1;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, var(--accent), #ffffff);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 200% 200%; }
+            50% { background-position: 0% 0%; }
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             opacity: 0.9;
             margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .contact-link {
-            background: rgba(255,255,255,0.2);
+            background: var(--glass);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
+            gap: 0.8rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
         }
 
         .contact-link:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-xl);
         }
 
         /* Theme Toggle */
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 2rem;
+            right: 2rem;
             background: var(--white);
             border: none;
-            padding: 12px;
+            padding: 1rem;
             border-radius: 50%;
             cursor: pointer;
             box-shadow: var(--shadow);
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: var(--text-dark);
+            font-size: 1.2rem;
         }
 
         .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-hover);
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: var(--shadow-xl);
         }
 
         /* Main Content */
         main {
-            padding: 4rem 0;
+            padding: 6rem 0;
+            position: relative;
         }
 
         .section {
-            margin-bottom: 4rem;
+            margin-bottom: 8rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3.5rem;
+            font-weight: 800;
             text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
         }
 
-        /* Cards */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Enhanced Cards */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
         .card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 2rem;
+            border-radius: 25px;
+            padding: 2.5rem;
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .card::before {
@@ -208,132 +331,214 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: var(--shadow-xl);
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .card-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: rotate(360deg) scale(1.1);
         }
 
         .card-title {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--text-dark);
             line-height: 1.3;
         }
 
         .card-description {
             color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
         }
 
         .card-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             background: linear-gradient(45deg, var(--bg-light), #e2e8f0);
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-light);
-            font-size: 3rem;
+            font-size: 3.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .card:hover .card-image::before {
+            opacity: 1;
+            animation: sweep 0.8s ease;
+        }
+
+        @keyframes sweep {
+            0% { transform: translate(-150%, -50%) rotate(45deg); }
+            100% { transform: translate(150%, -50%) rotate(45deg); }
         }
 
         .button {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .button:hover::before {
+            left: 100%;
         }
 
         .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
         }
 
         .button-secondary {
             background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
 
         .button-secondary:hover {
-            background: var(--primary-color);
+            background: var(--primary);
             color: white;
+            border-color: var(--primary);
         }
 
         /* Certificate Cards */
         .certificate-card {
             background: var(--white);
-            border-radius: 15px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border-left: 4px solid var(--primary-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
         }
 
         .certificate-card:hover {
-            transform: translateX(5px);
-            box-shadow: var(--shadow-hover);
+            transform: translateX(10px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        .certificate-card:hover::before {
+            opacity: 0.05;
         }
 
         .certificate-title {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.3rem;
+            font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .certificate-card:hover .certificate-title {
+            color: var(--text-dark);
         }
 
         .certificate-issuer {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .certificate-description {
             color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
         /* Stanford Section */
         .stanford-section {
-            background: linear-gradient(135deg, #8B0000, #DC143C);
+            background: linear-gradient(135deg, #8B0000, #DC143C, #FF6347);
             color: white;
             padding: 4rem 0;
-            margin: 4rem 0;
+            margin: 6rem 0;
             border-radius: 30px;
             position: relative;
             overflow: hidden;
@@ -346,7 +551,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stanford-pattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23stanford-pattern)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stanford-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23stanford-pattern)"/></svg>');
+            animation: patternMove 10s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(20px) translateY(20px); }
         }
 
         .stanford-content {
@@ -356,44 +567,100 @@
         }
 
         .stanford-logo {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.2);
+            width: 100px;
+            height: 100px;
+            background: var(--glass);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 2rem;
-            font-size: 2rem;
-            backdrop-filter: blur(10px);
+            font-size: 2.5rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .stanford-logo:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 1000;
+            transition: width 0.1s ease;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .profile-section {
                 flex-direction: column;
-                text-align: center;
+                gap: 2rem;
             }
 
-            h1 {
-                font-size: 2rem;
+            .profile-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .card {
+                padding: 2rem;
             }
 
             .contact-links {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
             }
+        }
 
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -402,29 +669,81 @@
         }
 
         .card, .certificate-card {
-            animation: fadeInUp 0.6s ease forwards;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
-        .card:nth-child(2) { animation-delay: 0.1s; }
-        .card:nth-child(3) { animation-delay: 0.2s; }
-        .card:nth-child(4) { animation-delay: 0.3s; }
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Particle System */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% { 
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
     <button class="theme-toggle" onclick="toggleTheme()">
         <i class="fas fa-moon"></i>
     </button>
 
     <header>
+        <div class="particles" id="particles"></div>
         <div class="container">
             <div class="header-content">
                 <div class="profile-section">
                     <div class="profile-image">
                         <i class="fas fa-user-graduate"></i>
                     </div>
-                    <div>
+                    <div class="profile-text">
                         <h1>Arav Parikh</h1>
-                        <p class="subtitle">AI & Healthcare Enthusiast | Freshman at Vista Del Lago</p>
+                        <p class="subtitle">AI & Healthcare Innovator | Rising Sophomore at Vista Del Lago</p>
                     </div>
                 </div>
                 <div class="contact-links">
@@ -445,7 +764,7 @@
     <main>
         <div class="container">
             <!-- Education Section -->
-            <section class="section">
+            <section class="section" id="education">
                 <h2 class="section-title">Education</h2>
                 <div class="cards-grid">
                     <div class="card">
@@ -464,12 +783,12 @@
                     </div>
 
                     <div class="stanford-section" style="margin: 0; border-radius: 20px;">
-                        <div class="stanford-content" style="padding: 2rem;">
-                            <div class="stanford-logo" style="margin-bottom: 1rem;">
+                        <div class="stanford-content" style="padding: 2.5rem;">
+                            <div class="stanford-logo" style="margin-bottom: 1.5rem;">
                                 <i class="fas fa-university"></i>
                             </div>
-                            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Stanford AI4ALL Program</h3>
-                            <p style="font-size: 1rem; line-height: 1.6; opacity: 0.9;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700;">Stanford AI4ALL Program</h3>
+                            <p style="font-size: 1.1rem; line-height: 1.7; opacity: 0.95;">
                                 Worked under the guidance of <strong>Issam Alzoubi</strong> and <strong>Ashley Lewis</strong> in Medical AI Group B. 
                                 Trained a vision-language model (VLM) and fine-tuned MEDCLIP on the BioMedMNIST dataset, developing a 
                                 reproducible pipeline for three medical imaging tasks. Collaborated with two teammates to present our project 
@@ -482,29 +801,9 @@
             </section>
 
             <!-- Projects Section -->
-            <section class="section">
+            <section class="section" id="projects">
                 <h2 class="section-title">Featured Projects</h2>
                 <div class="cards-grid">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon" style="background: linear-gradient(45deg, #8B0000, #DC143C);">
-                                <i class="fas fa-microscope"></i>
-                            </div>
-                            <h3 class="card-title">Stanford AI4ALL - Medical Vision-Language Model</h3>
-                        </div>
-                        <div class="card-image">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <p class="card-description">
-                            <strong>Stanford AI4ALL Program Project</strong><br>
-                            Trained and fine-tuned MEDCLIP vision-language model on BioMedMNIST dataset for medical imaging tasks. 
-                            Developed reproducible pipeline under guidance of Issam Alzoubi and Ashley Lewis. Presented to full cohort and judging panel.
-                        </p>
-                        <a href="https://colab.research.google.com/drive/1SjJcZEtUEXoWIOoy8ZmHFN3ajd8SpN6J#scrollTo=Kc5qdqmBUKl9" class="button">
-                            <i class="fab fa-google"></i> View Colab Notebook
-                        </a>
-                    </div>
-
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">
@@ -517,42 +816,36 @@
                         </div>
                         <p class="card-description">
                             Advanced machine learning model using XGBOOST to detect misdiagnosis risks in chronic pain patients, 
-                            improving healthcare outcomes through predictive analytics.
+                            improving healthcare outcomes through predictive analytics and data-driven insights.
                         </p>
                         <a href="https://github.com/aravparikh/Catboost-to-detect-Misdiagnosis-Risk-of-Chronic-Pain" class="button">
                             <i class="fas fa-external-link-alt"></i> View Project
                         </a>
                     </div>
 
-            <!-- VGG16 Card -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-eye"></i>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="card-title">VGG16 for Osteoarthritis Detection</h3>
+                        </div>
+                        <div class="card-image">
+                            <i class="fas fa-x-ray"></i>
+                        </div>
+                        <p class="card-description">
+                            Deep learning computer vision model using VGG16 architecture to detect osteoarthritis from medical imaging, 
+                            enabling early diagnosis and treatment planning through automated image analysis.
+                        </p>
+                        <a href="https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis" class="button">
+                            <i class="fas fa-external-link-alt"></i> View Project
+                        </a>
                     </div>
-                    <h3 class="card-title">VGG16 for Osteoarthritis Detection</h3>
                 </div>
-            
-                <div class="card-image">
-                    <img src="images/Screenshot 2025-01-05 181839.png" 
-                         alt="VGG16 Osteoarthritis Detection" 
-                         style="width: 100%; height: auto; border-radius: 12px;" />
-                </div>
-            
-                <p class="card-description">
-                    Deep learning computer vision model using VGG16 architecture to detect osteoarthritis from medical imaging, 
-                    enabling early diagnosis and treatment planning.
-                </p>
-            
-                <a href="https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis" class="button">
-                    <i class="fas fa-external-link-alt"></i> View Project
-                </a>
-            </div>
-            <!-- End of VGG16 Card -->
-
+            </section>
 
             <!-- Certificates Section -->
-            <section class="section">
+            <section class="section" id="certificates">
                 <h2 class="section-title">Certifications & Learning</h2>
                 <div class="cards-grid">
                     <div class="certificate-card">
@@ -563,7 +856,7 @@
                             Explored data analysis with NumPy and Pandas, visualization with Matplotlib, and foundational 
                             machine learning concepts for data science workflows.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/first_python_course.pdf" class="button button-secondary" target="_blank">
+                        <a href="images/first python course.pdf" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -575,7 +868,7 @@
                             Learned to investigate and summarize datasets, uncover patterns, spot anomalies, and test hypotheses. 
                             Practiced data cleaning, transformation, and statistical techniques using Python libraries.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/EDA_Certificate.pdf" class="button button-secondary" target="_blank">
+                        <a href="https://github.com/aravparikh/aravparikh.github.io/blob/65d7b8afe194853fa77d1663fda0ee7428292892/images/EDA%20Certificate.jpg" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -587,7 +880,7 @@
                             Built and evaluated regression models for continuous outcome prediction using Scikit-Learn. 
                             Covered linear regression, decision trees, polynomial regression, and model evaluation metrics.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/supervised_machine_learning_regression.pdf" class="button button-secondary" target="_blank">
+                        <a href="images/supervised machine learning regression.pdf" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -599,7 +892,7 @@
                             Gained expertise in classification algorithms including Logistic Regression, Decision Trees, 
                             SVMs, and Neural Networks. Learned model evaluation with precision-recall and ROC curves.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/Coursera_4MH8KTHL8ESA.jpg" class="button button-secondary" target="_blank">
+                        <a href="images/Coursera 4MH8KTHL8ESA.jpg" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -611,7 +904,7 @@
                             Focused on clustering techniques like K-Means, Hierarchical Clustering, DBSCAN, and dimensionality 
                             reduction methods such as PCA and t-SNE for pattern discovery in unstructured data.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/Coursera_A9JP2T870ZGH.pdf" class="button button-secondary" target="_blank">
+                        <a href="images/Coursera A9JP2T870ZGH.pdf" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -623,7 +916,7 @@
                             Explored foundational concepts of generative AI and LLMs, including tokenization, embeddings, 
                             transformer models, attention mechanisms, and ethical data preparation practices.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/Coursera_KPTPRG30FBE4.jpg" class="button button-secondary" target="_blank">
+                        <a href="images/Coursera KPTPRG30FBE4.jpg" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -635,7 +928,7 @@
                             Learned to interpret medical research, assess accuracy and reliability, identify bias in studies, 
                             understand statistical significance, and critically analyze scientific claims in healthcare.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/medical_research_course.pdf" class="button button-secondary" target="_blank">
+                        <a href="images/medical research course.pdf" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -647,7 +940,7 @@
                             Learned to identify and evaluate viable business ideas by focusing on market needs, customer pain points, 
                             and competitive analysis to differentiate solutions and leverage unique strengths.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/Coursera_KV21Y8PTM8NE.jpg" class="button button-secondary" target="_blank">
+                        <a href="images/Coursera KV21Y8PTM8NE.jpg" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -659,7 +952,7 @@
                             Gained practical knowledge in launching start-ups, creating MVPs, designing effective pitches, 
                             building founding teams, and developing entrepreneurial strategies for success.
                         </p>
-                        <a href="https://raw.githubusercontent.com/aravparikh/YOUR_REPO_NAME/main/images/Coursera_CEYI5MRAPHQE.pdf" class="button button-secondary" target="_blank">
+                        <a href="images/Coursera CEYI5MRAPHQE.pdf" class="button button-secondary" target="_blank">
                             <i class="fas fa-certificate"></i> View Certificate
                         </a>
                     </div>
@@ -669,6 +962,14 @@
     </main>
 
     <script>
+        // Loading Animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('fade-out');
+            }, 1000);
+        });
+
+        // Theme Toggle
         function toggleTheme() {
             const body = document.body;
             const themeToggle = document.querySelector('.theme-toggle i');
@@ -676,23 +977,32 @@
             if (body.getAttribute('data-theme') === 'dark') {
                 body.removeAttribute('data-theme');
                 themeToggle.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
             } else {
                 body.setAttribute('data-theme', 'dark');
                 themeToggle.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
             }
         }
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+        }
 
-        // Add scroll animations
+        // Scroll Progress
+        function updateScrollProgress() {
+            const scrolled = window.pageYOffset;
+            const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrolled / maxHeight) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        }
+
+        window.addEventListener('scroll', updateScrollProgress);
+
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -701,18 +1011,186 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.card, .certificate-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
         });
+
+        // Particle System
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.getElementById('particles').appendChild(particle);
+
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 25000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 500);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced card interactions
+        document.querySelectorAll('.card, .certificate-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.5 + (index * 0.1);
+                shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        // Add dynamic typing effect to subtitle
+        const subtitle = document.querySelector('.subtitle');
+        const originalText = subtitle.textContent;
+        let index = 0;
+        
+        function typeWriter() {
+            if (index < originalText.length) {
+                subtitle.textContent = originalText.slice(0, index);
+                index++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        // Start typing effect after a delay
+        setTimeout(() => {
+            subtitle.textContent = '';
+            typeWriter();
+        }, 2000);
+
+        // Add click ripple effect to buttons
+        document.querySelectorAll('.button, .contact-link').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation to CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Enhanced scroll animations
+        function handleScroll() {
+            const cards = document.querySelectorAll('.card, .certificate-card');
+            cards.forEach((card, index) => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Initial check
+
+        // Add mouse parallax effect to profile image
+        const profileImage = document.querySelector('.profile-image');
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+            
+            const x = (clientX / innerWidth - 0.5) * 20;
+            const y = (clientY / innerHeight - 0.5) * 20;
+            
+            profileImage.style.transform = `translate(${x}px, ${y}px) scale(1)`;
+        });
+
+        // Reset profile image position when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            profileImage.style.transform = 'translate(0, 0) scale(1)';
+        });
+
+        // Add performance optimization
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateAnimations);
+                ticking = true;
+            }
+        }
+
+        function updateAnimations() {
+            updateScrollProgress();
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', requestTick);
+
+        console.log('🚀 Arav Parikh Portfolio - Enhanced Edition Loaded Successfully!');
     </script>
 </body>
 </html>
