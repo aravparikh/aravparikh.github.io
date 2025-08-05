@@ -1,60 +1,677 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="en">
 <head>
-   {% if site.google_analytics %}
-   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-   <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '{{ site.google_analytics }}');
-   </script>
-   {% endif %}
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   {% seo %}
-   <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-   <link rel="stylesheet" href="{{ "/assets/css/darkmode.css" | relative_url }}">
-   <!--[if lt IE 9]>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-   <![endif]-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arav Parikh - AI & Healthcare Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-dark: #2d3748;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #9f7aea;
+            --secondary-color: #667eea;
+            --accent-color: #ed64a6;
+            --text-dark: #e2e8f0;
+            --text-light: #cbd5e0;
+            --bg-light: #1a202c;
+            --white: #2d3748;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ffffff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .contact-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .card-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, var(--bg-light), #e2e8f0);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 3rem;
+        }
+
+        .button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .button-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Certificate Cards */
+        .certificate-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .certificate-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .certificate-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-issuer {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .certificate-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        /* Stanford Section */
+        .stanford-section {
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+            color: white;
+            padding: 4rem 0;
+            margin: 4rem 0;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stanford-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stanford-pattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23stanford-pattern)"/></svg>');
+        }
+
+        .stanford-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .stanford-logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card, .certificate-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+    </style>
 </head>
 <body>
-   <div class="wrapper">
-      <header>
-         <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
-         {% if site.logo %}
-         <img src="{{site.logo | relative_url}}" alt="Logo" />
-         {% endif %}
-         <p>{{ site.description | default: site.github.project_tagline }}</p>
-         {% if site.github.is_project_page %}
-         <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
-         {% endif %}
-         {% if site.github.is_user_page %}
-         <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
-         {% endif %}
-         {% if site.show_downloads %}
-         <ul class="downloads">
-            <li><a href="{{ site.github.zip_url }}">Download <strong>ZIP File</strong></a></li>
-            <li><a href="{{ site.github.tar_url }}">Download <strong>TAR Ball</strong></a></li>
-            <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
-         </ul>
-         {% endif %}
-         <button id="darkModeToggle" class="button">Toggle Dark Mode</button>
-      </header>
-      <section>
-         {{ content }}
-      </section>
-      <footer>
-         {% if site.github.is_project_page %}
-         <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-         {% endif %}
-         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-   </div>
-   <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
-   <script src="{{ "/assets/js/darkmode.js" | relative_url }}"></script>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <h1>Arav Parikh</h1>
+                        <p class="subtitle">AI & Healthcare Enthusiast | Freshman at Vista Del Lago</p>
+                    </div>
+                </div>
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/arav-parikh-1853b92b6/" class="contact-link">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/aravparikh/" class="contact-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="mailto:aravparikh.1@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Stanford AI4ALL Section -->
+            <section class="stanford-section">
+                <div class="container">
+                    <div class="stanford-content">
+                        <div class="stanford-logo">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Stanford AI4ALL Program</h2>
+                        <div style="max-width: 800px; margin: 0 auto;">
+                            <p style="font-size: 1.1rem; line-height: 1.6; opacity: 0.9;">
+                                Worked under the guidance of <strong>Issam Alzoubi</strong> and <strong>Ashley Lewis</strong> in Medical AI Group B. 
+                                Trained a vision-language model (VLM) and fine-tuned MEDCLIP on the BioMedMNIST dataset, developing a 
+                                reproducible pipeline for three medical imaging tasks. Collaborated with two teammates to present our project 
+                                to the full program cohort and a judging panel. Attended faculty talks by leading AI scientists and Stanford 
+                                professors to deepen my understanding of the current and future landscape of artificial intelligence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="section">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3 class="card-title">XGBOOST for Chronic Pain Misdiagnosis Detection</h3>
+                        </div>
+                        <div class="card-image">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <p class="card-description">
+                            Advanced machine learning model using XGBOOST to detect misdiagnosis risks in chronic pain patients, 
+                            improving healthcare outcomes through predictive analytics.
+                        </p>
+                        <a href="https://github.com/aravparikh/Catboost-to-detect-Misdiagnosis-Risk-of-Chronic-Pain" class="button">
+                            <i class="fas fa-external-link-alt"></i> View Project
+                        </a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="card-title">VGG16 for Osteoarthritis Detection</h3>
+                        </div>
+                        <div class="card-image">
+                            <i class="fas fa-x-ray"></i>
+                        </div>
+                        <p class="card-description">
+                            Deep learning computer vision model using VGG16 architecture to detect osteoarthritis from medical imaging, 
+                            enabling early diagnosis and treatment planning.
+                        </p>
+                        <a href="https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis" class="button">
+                            <i class="fas fa-external-link-alt"></i> View Project
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certificates Section -->
+            <section class="section">
+                <h2 class="section-title">Certifications & Learning</h2>
+                <div class="cards-grid">
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Python for Data Science, AI & Development</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">
+                            Mastered Python fundamentals including variables, data types, flow control, and functions. 
+                            Explored data analysis with NumPy and Pandas, visualization with Matplotlib, and foundational 
+                            machine learning concepts for data science workflows.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Exploratory Data Analysis</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">
+                            Learned to investigate and summarize datasets, uncover patterns, spot anomalies, and test hypotheses. 
+                            Practiced data cleaning, transformation, and statistical techniques using Python libraries.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Supervised Machine Learning - Regression</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">
+                            Built and evaluated regression models for continuous outcome prediction using Scikit-Learn. 
+                            Covered linear regression, decision trees, polynomial regression, and model evaluation metrics.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Supervised Machine Learning - Classification</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">
+                            Gained expertise in classification algorithms including Logistic Regression, Decision Trees, 
+                            SVMs, and Neural Networks. Learned model evaluation with precision-recall and ROC curves.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Unsupervised Machine Learning</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">
+                            Focused on clustering techniques like K-Means, Hierarchical Clustering, DBSCAN, and dimensionality 
+                            reduction methods such as PCA and t-SNE for pattern discovery in unstructured data.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Generative AI and LLMs: Architecture and Data Preparation</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">
+                            Explored foundational concepts of generative AI and LLMs, including tokenization, embeddings, 
+                            transformer models, attention mechanisms, and ethical data preparation practices.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Understanding Medical Research</h3>
+                        <p class="certificate-issuer">Yale University</p>
+                        <p class="certificate-description">
+                            Learned to interpret medical research, assess accuracy and reliability, identify bias in studies, 
+                            understand statistical significance, and critically analyze scientific claims in healthcare.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Entrepreneurship 1: Developing the Opportunity</h3>
+                        <p class="certificate-issuer">Wharton School of Business</p>
+                        <p class="certificate-description">
+                            Learned to identify and evaluate viable business ideas by focusing on market needs, customer pain points, 
+                            and competitive analysis to differentiate solutions and leverage unique strengths.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Entrepreneurship 2: Launching your Start-Up</h3>
+                        <p class="certificate-issuer">Wharton School of Business</p>
+                        <p class="certificate-description">
+                            Gained practical knowledge in launching start-ups, creating MVPs, designing effective pitches, 
+                            building founding teams, and developing entrepreneurial strategies for success.
+                        </p>
+                        <a href="#" class="button button-secondary">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle i');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.className = 'fas fa-moon';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.className = 'fas fa-sun';
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .certificate-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
 
