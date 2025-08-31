@@ -27,6 +27,19 @@
             --transition-speed: 0.4s;
         }
 
+        body[data-theme="dark"] {
+            --primary: #9f7aea;
+            --secondary: #667eea;
+            --accent: #ed64a6;
+            --text-dark: #e2e8f0;
+            --text-light: #a0aec0;
+            --bg-main: #1a202c;
+            --bg-card: #2d3748;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: 0 0 0 1px rgba(255, 255, 255, 0.07);
+            --shadow-lg: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0,0,0,0.4);
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -41,576 +54,743 @@
             transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
         
-        /* Dark Mode Styles */
-        body.dark-mode {
-            --primary: #7f9cf5;
-            --secondary: #9f7aea;
-            --accent: #f687b3;
-            --text-dark: #edf2f7;
-            --text-light: #a0aec0;
-            --bg-main: #1a202c;
-            --bg-card: #2d3748;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow: 0 0 0 1px rgba(255, 255, 255, 0.07);
-            --shadow-lg: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0,0,0,0.4);
+        body[data-theme="dark"] {
+             background: linear-gradient(135deg, #0f1419 0%, #1a202c 50%, #2d3748 100%);
         }
 
-        /* Dark Mode Toggle Button */
-        #dark-mode-toggle {
+        /* Animated Background */
+        .bg-animation {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
             border-radius: 50%;
-            border: none;
-            background-color: var(--bg-card);
-            color: var(--text-dark);
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: var(--shadow-lg);
-            transition: transform 0.3s ease, background-color var(--transition-speed) ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
         }
 
-        #dark-mode-toggle:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
-        
-        #dark-mode-toggle .fa-sun { display: none; }
-        body.dark-mode #dark-mode-toggle .fa-sun { display: inline-block; }
-        body.dark-mode #dark-mode-toggle .fa-moon { display: none; }
+        .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: -5s; }
+        .shape:nth-child(3) { width: 100px; height: 100px; top: 40%; left: 60%; animation-delay: -10s; }
+        .shape:nth-child(4) { width: 40px; height: 40px; top: 80%; left: 20%; animation-delay: -15s; }
 
-
-        /* Hero Section */
-        @keyframes animated-gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
         }
 
-        .hero {
-            background: linear-gradient(135deg, #667eea, #764ba2, #6b46c1, #5a67d8);
-            background-size: 300% 300%;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            animation: animated-gradient 15s ease infinite;
         }
 
-        .hero::before {
+        header::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.3;
         }
 
-        .hero-content {
-            max-width: 1200px; padding: 0 20px; text-align: center; z-index: 2; position: relative;
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .hero-badge {
-            display: inline-block; background: rgba(255, 255, 255, 0.1); padding: 8px 20px;
-            border-radius: 30px; font-size: 14px; font-weight: 600; margin-bottom: 20px;
-            backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: fadeInDown 0.8s ease;
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem); font-weight: 900; margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease 0.2s both;
-            background: linear-gradient(45deg, #ffffff, #f093fb);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-
-        .hero-tagline {
-            font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 40px; opacity: 0.95;
-            animation: fadeInUp 0.8s ease 0.4s both; font-weight: 300;
-        }
-
-        .hero-buttons {
-            display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.6s both;
-        }
-
-        .btn-primary {
-            background: white; color: var(--primary); padding: 15px 35px; border-radius: 50px;
-            text-decoration: none; font-weight: 600; font-size: 16px;
-            transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent; color: white; padding: 15px 35px; border-radius: 50px;
-            text-decoration: none; font-weight: 600; font-size: 16px;
-            transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white; color: var(--primary); transform: translateY(-5px) scale(1.05);
-        }
-
-        /* Main Content Wrapper */
-        .content-wrapper {
-            background: var(--bg-main); border-radius: 40px 40px 0 0; margin-top: -40px;
-            position: relative; z-index: 10; min-height: 100vh;
-            box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.1);
-            transition: background-color var(--transition-speed) ease;
-        }
-        body.dark-mode .content-wrapper { box-shadow: 0 0 0 1px var(--border-color); }
-
-        .container {
-            max-width: 1200px; margin: 0 auto; padding: 80px 20px;
-        }
-
-        /* General Section Styles */
-        .section-badge {
-            display: inline-block; background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #fff; padding: 8px 20px; border-radius: 30px; font-size: 12px;
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
-            margin-bottom: 30px; color: var(--text-dark);
-            transition: color var(--transition-speed) ease;
-        }
-
-        .about-content {
-            font-size: 18px; line-height: 1.8; color: var(--text-light); max-width: 900px;
-            transition: color var(--transition-speed) ease;
-        }
-        .about-content strong { color: var(--text-dark); font-weight: 600; }
-        .highlight {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            font-weight: 700;
-        }
-        
-        /* Card & Grid Styles */
-        .card {
-            background: var(--bg-card); padding: 30px; border-radius: 20px;
-            transition: all 0.3s ease; border: 1px solid var(--border-color);
-        }
-        .card:hover {
-            transform: translateY(-8px); box-shadow: var(--shadow-lg);
-        }
-        
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 50px; }
-        .stat-card { text-align: center; }
-        .stat-number { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--secondary));
-                       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .stat-label { color: var(--text-light); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
-
-        /* Featured Project */
-        .featured-project {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 30px; padding: 60px; color: white; margin: 100px 0; position: relative; overflow: hidden;
-        }
-        body.dark-mode .featured-project { background: linear-gradient(135deg, #2d3748, #4a5568); }
-        .featured-badge { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); }
-        .featured-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; }
-        .featured-description { font-size: 18px; line-height: 1.8; margin-bottom: 30px; opacity: 0.95; }
-        .tech-badge { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); backdrop-filter: blur(5px); padding: 8px 16px; border-radius: 20px; font-size: 14px; }
-
-        /* Projects Grid */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px; }
-        .project-card { padding: 40px; position: relative; overflow: hidden; box-shadow: var(--shadow); }
-        .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-        .project-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-bottom: 20px; }
-        .project-title { font-size: 22px; font-weight: 700; margin-bottom: 15px; color: var(--text-dark); }
-        .project-description { color: var(--text-light); margin-bottom: 20px; line-height: 1.7; }
-        .project-link { color: var(--primary); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px; transition: all 0.3s ease; }
-        .project-link:hover { transform: translateX(5px); }
-
-        /* Skills Section */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-        .skill-category h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
-        .skill-category i { color: var(--primary); }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill-tag { background: var(--bg-main); padding: 8px 16px; border-radius: 20px; font-size: 14px; border: 1px solid var(--border-color); color: var(--text-dark); transition: all 0.3s ease; }
-        .skill-tag:hover { background: var(--primary); color: white; transform: scale(1.05); border-color: var(--primary); }
-        
-        /* Achievements & Certificates Section */
-        .achievements-grid, .certificates-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; margin-top: 50px;
-        }
-        .achievement-card {
-            border-left: 4px solid var(--primary);
-        }
-        .achievement-title, .certificate-title {
-            font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;
-        }
-        .achievement-org, .certificate-issuer {
-            color: var(--primary); font-weight: 600; margin-bottom: 10px; font-size: 15px;
-        }
-        .achievement-description, .certificate-description {
-            color: var(--text-light); line-height: 1.6;
-        }
-        .certificate-card {
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            position: relative;
         }
-        .certificate-card .fa-award {
-            font-size: 1.5rem;
-            color: var(--primary);
-            float: right;
-            opacity: 0.7;
+        
+        .profile-image:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
         }
-        #load-certs-btn {
-            display: inline-block;
-            padding: 15px 35px;
-            border: 2px solid var(--primary);
-            background-color: transparent;
-            color: var(--primary);
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--primary), var(--secondary));
+            z-index: -1;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, var(--accent), #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 200% 200%; }
+            50% { background-position: 0% 0%; }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .header-contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .contact-link {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem 2rem;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 30px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
         }
-        #load-certs-btn:hover {
-            background-color: var(--primary);
-            color: var(--bg-main);
-            transform: translateY(-3px);
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-5px) scale(1.05);
             box-shadow: var(--shadow-lg);
         }
 
-        /* Certificate Modal */
-        .modal {
-            display: none;
+        /* Theme Toggle */
+        .theme-toggle {
             position: fixed;
-            z-index: 2000;
-            padding-top: 50px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.5s ease;
+            top: 2rem;
+            right: 2rem;
+            background: var(--bg-card);
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-dark);
+            font-size: 1.2rem;
         }
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: auto;
-            max-width: 80%;
-            max-height: 85%;
-            animation: zoomIn 0.5s ease;
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: var(--shadow-lg);
         }
-        .modal-close {
+
+        main {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section {
+            margin-bottom: 8rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
             position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
             cursor: pointer;
         }
-        .modal-close:hover,
-        .modal-close:focus {
-            color: #bbb;
-            text-decoration: none;
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-        @keyframes zoomIn { from {transform: scale(0.5);} to {transform: scale(1);} }
 
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: var(--shadow-lg);
+        }
 
-        /* Contact Section */
-        .contact-section { text-align: center; margin-top: 100px; padding: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 30px; color: white; }
-        body.dark-mode .contact-section { background: linear-gradient(135deg, #2d3748, #4a5568); }
-        .contact-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; }
-        .contact-subtitle { font-size: 18px; margin-bottom: 40px; opacity: 0.9; }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
 
-        /* Responsive */
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover .card-icon {
+             transform: rotate(360deg) scale(1.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .card-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(45deg, var(--bg-card), var(--border-color));
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 3.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .card:hover .card-image::before {
+            opacity: 1;
+            animation: sweep 0.8s ease;
+        }
+
+        @keyframes sweep {
+             0% { transform: translate(-150%, -50%) rotate(45deg); }
+             100% { transform: translate(150%, -50%) rotate(45deg); }
+        }
+
+        .button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .button-secondary:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .certificate-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .certificate-card:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            color: var(--text-dark);
+        }
+        
+        .certificate-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .certificate-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+        
+        .certificate-card:hover .certificate-title {
+            color: var(--text-dark);
+        }
+
+        .certificate-issuer {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .certificate-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+        
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .featured-project, .contact-section { padding: 40px 30px; }
-            .projects-grid, .stats-grid { grid-template-columns: 1fr; }
-            .hero-buttons { flex-direction: column; align-items: center; }
-            #dark-mode-toggle { top: 15px; right: 15px; width: 45px; height: 45px; font-size: 18px;}
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+            .profile-text h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .card {
+                padding: 2rem;
+            }
+            .header-contact-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Animations */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
-    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">
         <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
     </button>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-graduation-cap"></i> High School Sophomore
-            </div>
-            <h1>Arav Parikh</h1>
-            <p class="hero-tagline">AI Researcher | Published Author | Aspiring Computer Scientist</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn-primary">
-                    <i class="fas fa-handshake"></i> Let's Connect
-                </a>
-                <a href="#projects" class="btn-secondary">
-                    <i class="fas fa-rocket"></i> View My Work
-                </a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Main Content -->
-    <div class="content-wrapper">
+    <header>
         <div class="container">
-            <!-- About Section -->
-            <section class="about-section fade-in">
-                <span class="section-badge">About Me</span>
-                <h2 class="section-title">Building the Future of Healthcare with AI</h2>
-                <div class="about-content">
-                    <p>
-                        I'm <strong>Arav Parikh</strong>, a <span class="highlight">rising sophomore at Vista Del Lago High School</span> who's passionate about leveraging artificial intelligence to solve real-world healthcare challenges. I've already <strong>developed and deployed AI models</strong> that address critical medical issues, from <span class="highlight">chronic pain misdiagnosis detection</span> to <span class="highlight">osteoarthritis screening</span>.
-                    </p>
-                    <p style="margin-top: 20px;">
-                        At 15, I've completed <strong>9+ professional certifications</strong>, participated in the prestigious <span class="highlight">Stanford AI4ALL program</span>, and am currently <strong>submitting research for publication</strong>. I don't just learn about AI—I build practical solutions that could impact millions of patients worldwide.
-                    </p>
-                    <p style="margin-top: 20px;">
-                        Beyond the code, I'm a <strong>Volleyball player</strong> and someone who believes that the intersection of technology and medicine will define the future of healthcare. My goal is to keep building AI solutions that make healthcare more accessible and accurate for everyone.
-                    </p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="card stat-card"> <div class="stat-number">4.0</div> <div class="stat-label">GPA</div> </div>
-                    <div class="card stat-card"> <div class="stat-number">9+</div> <div class="stat-label">Certifications</div> </div>
-                    <div class="card stat-card"> <div class="stat-number">3</div> <div class="stat-label">AI Models Deployed</div> </div>
-                    <div class="card stat-card"> <div class="stat-number">15</div> <div class="stat-label">Age</div> </div>
-                </div>
-            </section>
-
-            <!-- Featured Project -->
-            <section class="featured-project fade-in">
-                <span class="featured-badge">🌟 Featured Project</span>
-                <h2 class="featured-title">ChronicPain AI Assistant</h2>
-                <div class="featured-description">
-                    <p>Chronic pain affects over 50 million Americans, but misdiagnosis is a huge problem. I built an intelligent questionnaire with XGBoost that analyzes patient responses to flag potential misdiagnosis risks with 87% accuracy. It’s live on Hugging Face, so doctors and patients can actually use it to hopefully get better treatment faster.</p>
-                </div>
-                <div class="tech-stack">
-                    <span class="tech-badge">Python</span> <span class="tech-badge">XGBoost</span> <span class="tech-badge">Gradio</span> <span class="tech-badge">Pandas</span> <span class="tech-badge">NumPy</span> <span class="tech-badge">Hugging Face</span>
-                </div>
-                <div class="hero-buttons" style="margin-top: 30px;">
-                    <a href="https://huggingface.co/spaces/Acp111/ChronicPain-AI-Assistant" target="_blank" class="btn-primary" style="background: white; color: var(--primary);"> <i class="fas fa-external-link-alt"></i> Try Live Demo </a>
-                    <a href="https://github.com/aravparikh/Research_Paper" target="_blank" class="btn-secondary" style="border-color: white; color: white;"> <i class="fab fa-github"></i> View Code </a>
-                </div>
-            </section>
-
-            <!-- Projects Section -->
-            <section id="projects" class="projects-section fade-in">
-                <span class="section-badge">Projects</span>
-                <h2 class="section-title">AI Solutions in Healthcare</h2>
-                <div class="projects-grid">
-                    <div class="card project-card">
-                        <div class="project-icon"> <i class="fas fa-x-ray"></i> </div>
-                        <h3 class="project-title">Osteoarthritis Detection System</h3>
-                        <p class="project-description">Used deep learning (VGG16) to analyze X-rays and spot osteoarthritis with 92% accuracy. This could help millions get diagnosed earlier when treatment is way more effective.</p>
-                        <div class="project-links"> <a href="https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis" target="_blank" class="project-link"> <i class="fab fa-github"></i> GitHub </a> </div>
+            <div class="header-content">
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <i class="fas fa-user-graduate"></i>
                     </div>
-                    <div class="card project-card">
-                        <div class="project-icon"> <i class="fas fa-microscope"></i> </div>
-                        <h3 class="project-title">Stanford AI4ALL Research</h3>
-                        <p class="project-description">As part of this awesome program, I fine-tuned a MEDCLIP model on medical images and presented my work to Stanford faculty. It was a great dive into real-world AI research.</p>
-                        <div class="project-links"> <a href="#" class="project-link"> <i class="fas fa-university"></i> Stanford Program </a> </div>
+                    <div class="profile-text">
+                        <h1>Arav Parikh</h1>
+                        <p class="subtitle">AI & Healthcare Innovator | Rising Sophomore at Vista Del Lago</p>
+                    </div>
+                </div>
+                <div class="header-contact-links">
+                    <a href="https://www.linkedin.com/in/arav-parikh-1853b92b6/" class="contact-link" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/aravparikh" class="contact-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="mailto:aravparikh.1@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> Email</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="section" id="education">
+                <h2 class="section-title">Education</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-school"></i></div>
+                            <h3 class="card-title">Vista Del Lago High School</h3>
+                        </div>
+                        <p class="card-description">
+                            Currently a rising sophomore maintaining a 4.0 GPA while balancing a rigorous academic schedule with extracurriculars like varsity volleyball and leading the Quiz Bowl team.
+                        </p>
+                    </div>
+                    <div class="card">
+                         <div class="card-header">
+                            <div class="card-icon" style="background: linear-gradient(45deg, #8B0000, #DC143C);"><i class="fas fa-university"></i></div>
+                            <h3 class="card-title">Stanford AI4ALL Program</h3>
+                        </div>
+                        <p class="card-description">
+                            Selected for a competitive program where I worked under Stanford mentors. I trained a MEDCLIP vision-language model on the BioMedMNIST dataset and presented my team's project to faculty and peers.
+                        </p>
                     </div>
                 </div>
             </section>
 
-            <!-- Skills Section -->
-            <section class="skills-section fade-in">
-                <span class="section-badge">Technical Skills</span>
-                <h2 class="section-title">My Toolkit</h2>
-                <div class="skills-grid">
-                    <div class="card skill-category"><h3><i class="fas fa-code"></i> Languages</h3><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">JavaScript</span><span class="skill-tag">HTML/CSS</span></div></div>
-                    <div class="card skill-category"><h3><i class="fas fa-brain"></i> AI/ML</h3><div class="skill-tags"><span class="skill-tag">TensorFlow</span><span class="skill-tag">PyTorch</span><span class="skill-tag">Scikit-learn</span><span class="skill-tag">XGBoost</span><span class="skill-tag">Keras</span><span class="skill-tag">Hugging Face</span></div></div>
-                    <div class="card skill-category"><h3><i class="fas fa-chart-bar"></i> Data Science</h3><div class="skill-tags"><span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span><span class="skill-tag">Jupyter</span></div></div>
-                    <div class="card skill-category"><h3><i class="fas fa-tools"></i> Tools & Platforms</h3><div class="skill-tags"><span class="skill-tag">Git/GitHub</span><span class="skill-tag">Google Colab</span><span class="skill-tag">VS Code</span></div></div>
+            <section class="section" id="projects">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-brain"></i></div>
+                            <h3 class="card-title">XGBoost for Chronic Pain Misdiagnosis Detection</h3>
+                        </div>
+                        <div class="card-image"><i class="fas fa-chart-line"></i></div>
+                        <p class="card-description">Developed an advanced machine learning model using XGBoost to detect misdiagnosis risks in chronic pain patients, improving healthcare outcomes through predictive analytics.</p>
+                        <a href="https://github.com/aravparikh/Catboost-to-detect-Misdiagnosis-Risk-of-Chronic-Pain" class="button" target="_blank"><i class="fas fa-external-link-alt"></i> View Project</a>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-eye"></i></div>
+                            <h3 class="card-title">VGG16 for Osteoarthritis Detection</h3>
+                        </div>
+                        <div class="card-image"><i class="fas fa-x-ray"></i></div>
+                        <p class="card-description">Built a deep learning computer vision model using the VGG16 architecture to detect osteoarthritis from X-rays, enabling early diagnosis and treatment planning.</p>
+                        <a href="https://github.com/aravparikh/VGG16-to-Detect-Osteoarthritis" class="button" target="_blank"><i class="fas fa-external-link-alt"></i> View Project</a>
+                    </div>
                 </div>
             </section>
 
-            <!-- Achievements Section -->
-            <section class="achievements-section fade-in">
-                <span class="section-badge">Achievements & Leadership</span>
-                <h2 class="section-title">Beyond the Code</h2>
-                <div class="achievements-grid">
-                    <div class="card achievement-card"><h3 class="achievement-title">🏐 Varsity Volleyball Player</h3><p class="achievement-org">School Athletics</p><p class="achievement-description">Balancing tough practices with my coding projects. It's all about teamwork and managing my time.</p></div>
-                    <div class="card achievement-card"><h3 class="achievement-title">📝 Research Paper (Pending)</h3><p class="achievement-org">Journal of Emerging Investigators</p><p class="achievement-description">Wrote up my research on AI in healthcare and sent it off for publication. Fingers crossed it gets in!</p></div>
-                    <div class="card achievement-card"><h3 class="achievement-title">🎓 Stanford AI4ALL Scholar</h3><p class="achievement-org">Stanford University</p><p class="achievement-description">Got picked for this super competitive summer program where I worked with Stanford researchers on real medical AI projects.</p></div>
-                    <div class="card achievement-card"><h3 class="achievement-title">🏆 9+ Professional Certifications</h3><p class="achievement-org">IBM, Yale, Wharton</p><p class="achievement-description">I'm always learning. I've been taking advanced courses online to pick up new skills on my own time.</p></div>
-                </div>
-            </section>
-            
-            <!-- Certificates Section -->
-            <section id="certificates" class="certificates-section fade-in">
-                <span class="section-badge">Certifications</span>
-                <h2 class="section-title">My Learning Journey</h2>
-                <button id="load-certs-btn"><i class="fas fa-plus-circle"></i> Tap to Load Certificates</button>
-                <div class="certificates-grid" style="display: none;">
-                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/667eea/ffffff?text=Python+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Python for Data Science, AI & Development</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">This was my entry point into Python for AI. It covered all the fundamentals I use in my projects today.</p></div>
-                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/764ba2/ffffff?text=ML+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Machine Learning Specialization</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">A deep dive into supervised and unsupervised learning. This is where I really learned how to build and train models.</p></div>
-                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/667eea/ffffff?text=Yale+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Understanding Medical Research</h3><p class="certificate-issuer">Yale University</p><p class="certificate-description">To make sure my AI is actually useful in medicine, this course taught me how to read and interpret real clinical studies.</p></div>
-                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/764ba2/ffffff?text=GenAI+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Generative AI and LLMs</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">Exploring the tech behind things like ChatGPT. Super interesting to see how large language models are built.</p></div>
-                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/667eea/ffffff?text=Wharton+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Entrepreneurship Specialization</h3><p class="certificate-issuer">Wharton School of Business</p><p class="certificate-description">Having cool ideas is one thing; this series taught me how you can actually turn a project into a real startup.</p></div>
-                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/764ba2/ffffff?text=EDA+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Exploratory Data Analysis</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">Learned how to find the stories hidden in the data. It's the first step before any machine learning happens.</p></div>
-                </div>
-            </section>
-
-            <!-- Contact Section -->
-            <section id="contact" class="contact-section fade-in">
-                <h2 class="contact-title">Let's Build Something Amazing Together</h2>
-                <p class="contact-subtitle">I'm always excited to connect with researchers, mentors, and fellow innovators in AI and healthcare.</p>
-                <div class="contact-links">
-                    <a href="https://www.linkedin.com/in/arav-parikh-1853b92b6/" target="_blank" class="btn-primary" style="background: white; color: var(--primary);"> <i class="fab fa-linkedin"></i> Connect on LinkedIn </a>
-                    <a href="mailto:aravparikh.1@gmail.com" class="btn-secondary" style="border-color: white; color: white;"> <i class="fas fa-envelope"></i> Send Email </a>
-                    <a href="https://github.com/aravparikh/" target="_blank" class="btn-secondary" style="border-color: white; color: white;"> <i class="fab fa-github"></i> GitHub Profile </a>
+            <section class="section" id="certificates">
+                <h2 class="section-title">Certifications & Learning</h2>
+                <div class="cards-grid">
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Python for Data Science, AI & Development</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">Explored data analysis with NumPy/Pandas, visualization, and foundational machine learning concepts.</p>
+                        <a href="https://raw.githubusercontent.com/aravparikh/aravparikh.github.io/main/images/first%20python%20course.pdf" class="button button-secondary" target="_blank"><i class="fas fa-certificate"></i> View Certificate</a>
+                    </div>
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Exploratory Data Analysis</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">Learned to investigate datasets, uncover patterns, spot anomalies, and test hypotheses with Python.</p>
+                        <a href="https://raw.githubusercontent.com/aravparikh/aravparikh.github.io/main/images/EDA%20Certificate.jpg" class="button button-secondary" target="_blank"><i class="fas fa-certificate"></i> View Certificate</a>
+                    </div>
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Supervised Machine Learning: Regression</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">Built and evaluated regression models for continuous outcome prediction using Scikit-Learn.</p>
+                         <a href="https://raw.githubusercontent.com/aravparikh/aravparikh.github.io/main/images/supervised%20machine%20learning%20regression.pdf" class="button button-secondary" target="_blank"><i class="fas fa-certificate"></i> View Certificate</a>
+                    </div>
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Supervised Machine Learning: Classification</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">Gained expertise in classification algorithms including Logistic Regression, Decision Trees, and SVMs.</p>
+                        <a href="https://raw.githubusercontent.com/aravparikh/aravparikh.github.io/main/images/Coursera%204MH8KTHL8ESA.jpg" class="button button-secondary" target="_blank"><i class="fas fa-certificate"></i> View Certificate</a>
+                    </div>
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Unsupervised Machine Learning</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">Focused on clustering techniques like K-Means and dimensionality reduction methods such as PCA.</p>
+                         <a href="https://raw.githubusercontent.com/aravparikh/aravparikh.github.io/main/images/Coursera%20A9JP2T870ZGH.pdf" class="button button-secondary" target="_blank"><i class="fas fa-certificate"></i> View Certificate</a>
+                    </div>
+                    <div class="certificate-card">
+                        <h3 class="certificate-title">Generative AI and LLMs</h3>
+                        <p class="certificate-issuer">IBM</p>
+                        <p class="certificate-description">Explored concepts of generative AI, including tokenization, embeddings, and transformer models.</p>
+                        <a href="https://raw.githubusercontent.com/aravparikh/aravparikh.github.io/main/images/Coursera%20KPTPRG30FBE4.jpg" class="button button-secondary" target="_blank"><i class="fas fa-certificate"></i> View Certificate</a>
+                    </div>
                 </div>
             </section>
         </div>
-    </div>
-    
-    <!-- Certificate Modal -->
-    <div id="certificate-modal" class="modal">
-        <span class="modal-close">&times;</span>
-        <img class="modal-content" id="modal-img">
-    </div>
+    </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const darkModeToggle = document.getElementById('dark-mode-toggle');
-            const body = document.body;
-
-            // Function to apply the saved theme
-            const applyTheme = (theme) => {
-                if (theme === 'dark') {
-                    body.classList.add('dark-mode');
-                } else {
-                    body.classList.remove('dark-mode');
-                }
-            };
-
-            // Check for saved theme in localStorage
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-            }
-
-            // Toggle dark mode on button click
-            darkModeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark-mode');
-                const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-                localStorage.setItem('theme', currentTheme);
-            });
-
-            // Fade-in animation on scroll
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth', block: 'start'
-                    });
-                });
-            });
-            
-            // Certificate Loader
-            const loadCertsBtn = document.getElementById('load-certs-btn');
-            const certsGrid = document.querySelector('.certificates-grid');
-            
-            loadCertsBtn.addEventListener('click', () => {
-                certsGrid.style.display = 'grid';
-                // Small delay to allow display property to apply before adding class for transition
-                setTimeout(() => {
-                    certsGrid.classList.add('visible');
-                }, 10);
-                loadCertsBtn.style.display = 'none';
-            });
-
-            // Certificate Modal Logic
-            const modal = document.getElementById('certificate-modal');
-            const modalImg = document.getElementById('modal-img');
-            const closeModal = document.querySelector('.modal-close');
-            const certificateCards = document.querySelectorAll('.certificate-card');
-
-            certificateCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    modal.style.display = 'block';
-                    modalImg.src = card.dataset.imgSrc;
-                });
-            });
-            
-            const closeTheModal = () => {
-                modal.style.display = 'none';
-            }
-
-            closeModal.addEventListener('click', closeTheModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeTheModal();
-                }
-            });
-            document.addEventListener('keydown', (e) => {
-                if(e.key === "Escape" && modal.style.display === "block") {
-                    closeTheModal();
-                }
-            });
-
-
-            // Console message
-            console.log('%c🚀 Welcome to Arav Parikh\'s Portfolio!', 'font-size: 20px; font-weight: bold; color: #667eea;');
-            console.log('%c📧 Feel free to reach out at aravparikh.1@gmail.com', 'font-size: 14px; color: #764ba2;');
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('fade-out');
+            }, 500);
         });
+
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle i');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+        }
+
+        function updateScrollProgress() {
+            const scrolled = window.pageYOffset;
+            const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrolled / maxHeight) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateScrollProgress);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        console.log('🚀 Arav Parikh Portfolio - Enhanced Edition Loaded Successfully!');
     </script>
 </body>
 </html>
