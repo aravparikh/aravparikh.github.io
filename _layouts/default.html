@@ -267,12 +267,75 @@
         .achievement-description, .certificate-description {
             color: var(--text-light); line-height: 1.6;
         }
+        .certificate-card {
+            cursor: pointer;
+        }
         .certificate-card .fa-award {
             font-size: 1.5rem;
             color: var(--primary);
             float: right;
             opacity: 0.7;
         }
+        #load-certs-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border: 2px solid var(--primary);
+            background-color: transparent;
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+        #load-certs-btn:hover {
+            background-color: var(--primary);
+            color: var(--bg-main);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Certificate Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.5s ease;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: auto;
+            max-width: 80%;
+            max-height: 85%;
+            animation: zoomIn 0.5s ease;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        @keyframes zoomIn { from {transform: scale(0.5);} to {transform: scale(1);} }
+
 
         /* Contact Section */
         .contact-section { text-align: center; margin-top: 100px; padding: 60px;
@@ -422,13 +485,14 @@
             <section id="certificates" class="certificates-section fade-in">
                 <span class="section-badge">Certifications</span>
                 <h2 class="section-title">My Learning Journey</h2>
-                <div class="certificates-grid">
-                    <div class="card certificate-card"><i class="fas fa-award"></i><h3 class="certificate-title">Python for Data Science, AI & Development</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">This was my entry point into Python for AI. It covered all the fundamentals I use in my projects today.</p></div>
-                    <div class="card certificate-card"><i class="fas fa-award"></i><h3 class="certificate-title">Machine Learning Specialization</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">A deep dive into supervised and unsupervised learning. This is where I really learned how to build and train models.</p></div>
-                    <div class="card certificate-card"><i class="fas fa-award"></i><h3 class="certificate-title">Understanding Medical Research</h3><p class="certificate-issuer">Yale University</p><p class="certificate-description">To make sure my AI is actually useful in medicine, this course taught me how to read and interpret real clinical studies.</p></div>
-                    <div class="card certificate-card"><i class="fas fa-award"></i><h3 class="certificate-title">Generative AI and LLMs</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">Exploring the tech behind things like ChatGPT. Super interesting to see how large language models are built.</p></div>
-                    <div class="card certificate-card"><i class="fas fa-award"></i><h3 class="certificate-title">Entrepreneurship Specialization</h3><p class="certificate-issuer">Wharton School of Business</p><p class="certificate-description">Having cool ideas is one thing; this series taught me how you can actually turn a project into a real startup.</p></div>
-                    <div class="card certificate-card"><i class="fas fa-award"></i><h3 class="certificate-title">Exploratory Data Analysis</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">Learned how to find the stories hidden in the data. It's the first step before any machine learning happens.</p></div>
+                <button id="load-certs-btn"><i class="fas fa-plus-circle"></i> Tap to Load Certificates</button>
+                <div class="certificates-grid" style="display: none;">
+                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/667eea/ffffff?text=Python+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Python for Data Science, AI & Development</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">This was my entry point into Python for AI. It covered all the fundamentals I use in my projects today.</p></div>
+                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/764ba2/ffffff?text=ML+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Machine Learning Specialization</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">A deep dive into supervised and unsupervised learning. This is where I really learned how to build and train models.</p></div>
+                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/667eea/ffffff?text=Yale+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Understanding Medical Research</h3><p class="certificate-issuer">Yale University</p><p class="certificate-description">To make sure my AI is actually useful in medicine, this course taught me how to read and interpret real clinical studies.</p></div>
+                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/764ba2/ffffff?text=GenAI+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Generative AI and LLMs</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">Exploring the tech behind things like ChatGPT. Super interesting to see how large language models are built.</p></div>
+                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/667eea/ffffff?text=Wharton+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Entrepreneurship Specialization</h3><p class="certificate-issuer">Wharton School of Business</p><p class="certificate-description">Having cool ideas is one thing; this series taught me how you can actually turn a project into a real startup.</p></div>
+                    <div class="card certificate-card" data-img-src="https://placehold.co/1200x800/764ba2/ffffff?text=EDA+Cert"><i class="fas fa-award"></i><h3 class="certificate-title">Exploratory Data Analysis</h3><p class="certificate-issuer">IBM</p><p class="certificate-description">Learned how to find the stories hidden in the data. It's the first step before any machine learning happens.</p></div>
                 </div>
             </section>
 
@@ -443,6 +507,12 @@
                 </div>
             </section>
         </div>
+    </div>
+    
+    <!-- Certificate Modal -->
+    <div id="certificate-modal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modal-img">
     </div>
 
     <script>
@@ -468,43 +538,74 @@
             // Toggle dark mode on button click
             darkModeToggle.addEventListener('click', () => {
                 body.classList.toggle('dark-mode');
-                // Save the new theme preference
                 const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
                 localStorage.setItem('theme', currentTheme);
             });
 
             // Fade-in animation on scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Optional: stop observing once visible
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
-            });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth', block: 'start'
+                    });
                 });
             });
+            
+            // Certificate Loader
+            const loadCertsBtn = document.getElementById('load-certs-btn');
+            const certsGrid = document.querySelector('.certificates-grid');
+            
+            loadCertsBtn.addEventListener('click', () => {
+                certsGrid.style.display = 'grid';
+                // Small delay to allow display property to apply before adding class for transition
+                setTimeout(() => {
+                    certsGrid.classList.add('visible');
+                }, 10);
+                loadCertsBtn.style.display = 'none';
+            });
+
+            // Certificate Modal Logic
+            const modal = document.getElementById('certificate-modal');
+            const modalImg = document.getElementById('modal-img');
+            const closeModal = document.querySelector('.modal-close');
+            const certificateCards = document.querySelectorAll('.certificate-card');
+
+            certificateCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    modal.style.display = 'block';
+                    modalImg.src = card.dataset.imgSrc;
+                });
+            });
+            
+            const closeTheModal = () => {
+                modal.style.display = 'none';
+            }
+
+            closeModal.addEventListener('click', closeTheModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeTheModal();
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if(e.key === "Escape" && modal.style.display === "block") {
+                    closeTheModal();
+                }
+            });
+
 
             // Console message
             console.log('%c🚀 Welcome to Arav Parikh\'s Portfolio!', 'font-size: 20px; font-weight: bold; color: #667eea;');
@@ -513,3 +614,4 @@
     </script>
 </body>
 </html>
+
